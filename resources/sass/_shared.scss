@@ -1,0 +1,154 @@
+// ============================
+// Shared / Layout Styles
+// ============================
+
+// Skip-to-content link for keyboard & screen-reader users
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 9999;
+    padding: 0.75rem 1.5rem;
+    background: $primary;
+    color: #fff;
+    border-radius: 0 0 $radius-sm $radius-sm;
+    font-weight: 600;
+    text-decoration: none;
+    transition: top 0.2s ease;
+
+    &:focus {
+        top: 0;
+        color: #fff;
+    }
+}
+
+// Custom navbar
+.navbar-custom {
+    background-color: $bg-card;
+    border-bottom: 1px solid $border-color;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.3s ease;
+
+    // Glassmorphism effect on scroll (can be activated with JS)
+    &.navbar-scrolled {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        backdrop-filter: blur(12px);
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .navbar-brand {
+        color: $primary;
+        font-size: 1.25rem;
+        font-weight: 700;
+        transition: color 0.2s ease, transform 0.2s ease;
+
+        &:hover {
+            color: $primary-hover;
+            transform: scale(1.02);
+        }
+
+        i {
+            transition: transform 0.3s ease;
+        }
+
+        &:hover i {
+            transform: rotate(-8deg);
+        }
+    }
+
+    .nav-link {
+        color: $text-muted;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: $radius-sm;
+        transition: color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+        position: relative;
+
+        // Animated underline
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, $primary, $secondary);
+            border-radius: 1px;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+
+        &:hover {
+            color: $primary;
+            background-color: rgba($primary, 0.06);
+
+            &::after {
+                width: 60%;
+                left: 20%;
+            }
+        }
+
+        &:active {
+            transform: scale(0.97);
+        }
+
+        &.active {
+            color: $primary;
+            font-weight: 600;
+            background-color: rgba($primary, 0.08);
+
+            &::after {
+                width: 60%;
+                left: 20%;
+            }
+        }
+    }
+
+    // Mobile toggle button animation
+    .navbar-toggler {
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 3px $primary-light;
+        }
+    }
+}
+
+// Footer
+.footer-custom {
+    border-top: 1px solid $border-color;
+    color: $text-light;
+    font-size: 0.85rem;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: $text-muted;
+    }
+}
+
+// Global smooth scroll
+html {
+    scroll-behavior: smooth;
+}
+
+// Improved focus styles globally
+*:focus-visible {
+    outline: 3px solid rgba($primary, 0.5);
+    outline-offset: 2px;
+}
+
+// Respect reduced motion preferences
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

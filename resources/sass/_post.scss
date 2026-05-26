@@ -1,0 +1,454 @@
+// ============================
+// Post Page Styles
+// ============================
+
+// ---- Entrance Animations ----
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: $shadow-primary; }
+    50%      { box-shadow: 0 4px 20px -2px rgba(79, 70, 229, 0.4); }
+}
+
+@keyframes badgePop {
+    0%   { transform: scale(0.8); opacity: 0; }
+    60%  { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+// ---- Page Header ----
+.page-header {
+    animation: fadeInUp 0.6s ease-out both;
+}
+
+.page-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: $primary;
+    background: linear-gradient(135deg, $primary 0%, $secondary 50%, #8b5cf6 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.025em;
+    animation: shimmer 4s ease-in-out infinite;
+
+    @media (forced-colors: active) {
+        -webkit-text-fill-color: currentColor;
+        background: none;
+        animation: none;
+    }
+
+    @media (max-width: 767.98px) {
+        font-size: 1.75rem;
+    }
+
+    @media (max-width: 575.98px) {
+        font-size: 1.5rem;
+    }
+}
+
+.page-subtitle {
+    color: $text-muted;
+    animation: fadeInUp 0.6s 0.1s ease-out both;
+}
+
+// ---- Card Container ----
+.post-card {
+    background: $bg-card;
+    border: 1px solid $border-color;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-md;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInLeft 0.5s 0.2s ease-out both;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-lg;
+    }
+
+    @media (max-width: 767.98px) {
+        border-radius: $radius-md;
+    }
+}
+
+// ---- Form Controls ----
+.form-label {
+    color: $text-muted;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.form-control {
+    border: 2px solid $border-color;
+    border-radius: $radius-sm;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    color: $text-primary;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: $bg-page;
+
+    &::placeholder {
+        color: #94a3b8;
+        transition: opacity 0.2s ease;
+    }
+
+    &:focus {
+        background-color: $bg-card;
+        border-color: $primary;
+        box-shadow: 0 0 0 4px $primary-light;
+        outline: 0;
+
+        &::placeholder {
+            opacity: 0.5;
+        }
+    }
+
+    &:hover:not(:focus) {
+        border-color: #94a3b8;
+    }
+
+    &.is-invalid {
+        border-color: #ef4444;
+        animation: shake 0.4s ease;
+
+        &:focus {
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+        }
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%      { transform: translateX(-4px); }
+    40%      { transform: translateX(4px); }
+    60%      { transform: translateX(-3px); }
+    80%      { transform: translateX(3px); }
+}
+
+// Floating label effect — label moves up when sibling input is focused
+.form-group-animated {
+    position: relative;
+
+    .form-label {
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .form-control:focus ~ .form-label,
+    .form-control:not(:placeholder-shown) ~ .form-label {
+        color: $primary;
+    }
+}
+
+// ---- Submit Button ----
+.btn-submit {
+    background: linear-gradient(135deg, $primary 0%, $secondary 100%);
+    color: white;
+    border: none;
+    border-radius: $radius-sm;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: $shadow-primary;
+    position: relative;
+    overflow: hidden;
+
+    // Subtle shine sweep on idle
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+        transition: left 0.5s ease;
+    }
+
+    &:hover {
+        background: linear-gradient(135deg, $primary-hover 0%, $secondary-hover 100%);
+        transform: translateY(-2px);
+        box-shadow: $shadow-primary-hover;
+        color: white;
+
+        &::before {
+            left: 100%;
+        }
+    }
+
+    &:active {
+        transform: translateY(1px) scale(0.98);
+    }
+
+    &:focus-visible {
+        outline: 3px solid #818cf8;
+        outline-offset: 2px;
+        box-shadow: 0 0 0 4px rgba($primary, 0.25);
+    }
+
+    &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+        animation: pulseGlow 2s ease-in-out infinite;
+
+        &::before {
+            display: none;
+        }
+    }
+}
+
+// ---- Table Container ----
+.custom-table-container {
+    background: $bg-card;
+    border: 1px solid $border-color;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    box-shadow: $shadow-sm;
+    animation: fadeInRight 0.5s 0.3s ease-out both;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+        box-shadow: $shadow-md;
+    }
+}
+
+.custom-table-header {
+    padding: 1.25rem 1.5rem 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid $border-light;
+
+    .post-count {
+        font-size: 0.8rem;
+        color: $text-light;
+        background: $border-light;
+        padding: 0.25rem 0.75rem;
+        border-radius: $radius-pill;
+        font-weight: 600;
+        animation: badgePop 0.4s 0.6s ease-out both;
+    }
+}
+
+.custom-table {
+    margin-bottom: 0;
+    width: 100%;
+    border-collapse: collapse;
+
+    th {
+        background-color: $bg-page;
+        color: $text-muted;
+        font-weight: 700;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 1rem 1.5rem;
+        border-bottom: 2px solid $border-color;
+        white-space: nowrap;
+    }
+
+    td {
+        padding: 1.25rem 1.5rem;
+        vertical-align: middle;
+        color: $text-secondary;
+        border-bottom: 1px solid $border-light;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    tbody tr {
+        transition: background-color 0.2s ease,
+                    border-left-color 0.2s ease,
+                    transform 0.15s ease;
+        border-left: 3px solid transparent;
+    }
+
+    tbody tr:hover {
+        background-color: rgba($primary, 0.03);
+        border-left-color: $primary;
+        // Subtle lift on row hover
+        position: relative;
+        z-index: 1;
+    }
+
+    // Staggered row entrance animation
+    @for $i from 1 through 20 {
+        tbody tr:nth-child(#{$i}) {
+            animation: fadeInUp 0.35s #{0.3 + ($i * 0.06)}s ease-out both;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        th, td {
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+        }
+    }
+}
+
+// Description truncation
+.description-cell {
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media (max-width: 767.98px) {
+        max-width: 180px;
+    }
+
+    @media (max-width: 575.98px) {
+        max-width: 120px;
+    }
+}
+
+// ---- Status Badges ----
+.badge-status {
+    padding: 0.35em 0.8em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: $radius-pill;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.badge-status-draft {
+    background-color: $status-draft-bg;
+    color: $status-draft-text;
+    border: 1px solid rgba($status-draft-text, 0.15);
+}
+
+.badge-status-published {
+    background-color: $status-published-bg;
+    color: $status-published-text;
+    border: 1px solid rgba($status-published-text, 0.15);
+}
+
+.badge-status-archived {
+    background-color: $status-archived-bg;
+    color: $status-archived-text;
+    border: 1px solid rgba($status-archived-text, 0.15);
+}
+
+// ---- Alerts ----
+.alert-custom-success {
+    background-color: $success-bg;
+    border: 1px solid $success-border;
+    color: $success-text;
+    border-radius: $radius-md;
+    padding: 1rem 1.25rem;
+    animation: slideDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.alert-custom-danger {
+    background-color: $danger-bg;
+    border: 1px solid $danger-border;
+    color: $danger-text;
+    border-radius: $radius-md;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    animation: slideDown 0.3s ease-out both;
+}
+
+// ---- Empty State ----
+.empty-state {
+    padding: 3rem 1rem;
+    text-align: center;
+    color: $text-light;
+    animation: fadeInUp 0.5s 0.4s ease-out both;
+
+    i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: block;
+        color: #cbd5e1;
+        animation: floatIdle 3s ease-in-out infinite;
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+}
+
+@keyframes floatIdle {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+}
+
+// ---- Section heading inside card ----
+.section-heading {
+    .h4 {
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, $primary, $secondary);
+            transition: width 0.3s ease;
+        }
+    }
+
+    &:hover .h4::after {
+        width: 100%;
+    }
+}
