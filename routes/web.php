@@ -13,13 +13,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home/{id}/{name}',[HomeController::class, 'Home'])->name('AboutMe');
+Route::get('/home/{id}/{name}', [HomeController::class, 'Home'])->name('AboutMe');
 
 Route::get('/AboutMe/{id}/{name}', [HomeController::class, 'AboutMe'])->name('about');
 Route::get('/contact/{id}/{name}', [HomeController::class, 'contact'])->name('contact');
 
-Route::group(['prefix' => 'user'], function(){
-    
+Route::group(['prefix' => 'user'], function () {
+
     //     Route::get('/', function(){
     //     return ("User Page");
     // });
@@ -46,6 +46,8 @@ Route::get('form', [FormController::class, 'index']);
 
 Route::get('/post', [PostController::class, 'index']);
 Route::post('/post', [PostController::class, 'store'])->name('post.store');
+Route::get('/post/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
+Route::put('/post/{id}', [PostController::class, 'update'])->name('post.update');
 
-Route::get('/notfound', [FallBackController::class, 'notfound'])-> name('NotFound');
+Route::get('/notfound', [FallBackController::class, 'notfound'])->name('NotFound');
 Route::fallback([FallBackController::class, 'fallback']);

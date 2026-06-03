@@ -8,6 +8,7 @@
         opacity: 0;
         transform: translateY(24px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -19,6 +20,7 @@
         opacity: 0;
         transform: translateX(-24px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -30,6 +32,7 @@
         opacity: 0;
         transform: translateX(24px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -37,24 +40,53 @@
 }
 
 @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-12px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes shimmer {
-    0%   { background-position: -200% center; }
-    100% { background-position: 200% center; }
+    0% {
+        background-position: -200% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
 }
 
 @keyframes pulseGlow {
-    0%, 100% { box-shadow: $shadow-primary; }
-    50%      { box-shadow: 0 4px 20px -2px rgba(79, 70, 229, 0.4); }
+
+    0%,
+    100% {
+        box-shadow: $shadow-primary;
+    }
+
+    50% {
+        box-shadow: 0 4px 20px -2px rgba(79, 70, 229, 0.4);
+    }
 }
 
 @keyframes badgePop {
-    0%   { transform: scale(0.8); opacity: 0; }
-    60%  { transform: scale(1.05); }
-    100% { transform: scale(1); opacity: 1; }
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 // ---- Page Header ----
@@ -101,7 +133,7 @@
     border-radius: $radius-lg;
     box-shadow: $shadow-md;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     animation: fadeInLeft 0.5s 0.2s ease-out both;
 
     &:hover {
@@ -163,11 +195,27 @@
 }
 
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    20%      { transform: translateX(-4px); }
-    40%      { transform: translateX(4px); }
-    60%      { transform: translateX(-3px); }
-    80%      { transform: translateX(3px); }
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-4px);
+    }
+
+    40% {
+        transform: translateX(4px);
+    }
+
+    60% {
+        transform: translateX(-3px);
+    }
+
+    80% {
+        transform: translateX(3px);
+    }
 }
 
 // Floating label effect — label moves up when sibling input is focused
@@ -178,8 +226,8 @@
         transition: color 0.2s ease, transform 0.2s ease;
     }
 
-    .form-control:focus ~ .form-label,
-    .form-control:not(:placeholder-shown) ~ .form-label {
+    .form-control:focus~.form-label,
+    .form-control:not(:placeholder-shown)~.form-label {
         color: $primary;
     }
 }
@@ -206,7 +254,7 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
         transition: left 0.5s ease;
     }
 
@@ -306,8 +354,8 @@
 
     tbody tr {
         transition: background-color 0.2s ease,
-                    border-left-color 0.2s ease,
-                    transform 0.15s ease;
+            border-left-color 0.2s ease,
+            transform 0.15s ease;
         border-left: 3px solid transparent;
     }
 
@@ -327,7 +375,9 @@
     }
 
     @media (max-width: 575.98px) {
-        th, td {
+
+        th,
+        td {
             padding: 0.75rem 1rem;
             font-size: 0.85rem;
         }
@@ -336,17 +386,17 @@
 
 // Description truncation
 .description-cell {
-    max-width: 300px;
+    max-width: 180px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 
     @media (max-width: 767.98px) {
-        max-width: 180px;
+        max-width: 130px;
     }
 
     @media (max-width: 575.98px) {
-        max-width: 120px;
+        max-width: 100px;
     }
 }
 
@@ -383,6 +433,49 @@
     background-color: $status-archived-bg;
     color: $status-archived-text;
     border: 1px solid rgba($status-archived-text, 0.15);
+}
+
+.badge-status-pending {
+    background-color: $status-pending-bg;
+    color: $status-pending-text;
+    border: 1px solid rgba($status-pending-text, 0.15);
+}
+
+.badge-status-deleted {
+    background-color: $status-deleted-bg;
+    color: $status-deleted-text;
+    border: 1px solid rgba($status-deleted-text, 0.15);
+}
+
+// ---- Form Select (Status Dropdown) ----
+.form-select {
+    border: 2px solid $border-color;
+    border-radius: $radius-sm;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    color: $text-primary;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: $bg-page;
+
+    &:focus {
+        background-color: $bg-card;
+        border-color: $primary;
+        box-shadow: 0 0 0 4px $primary-light;
+        outline: 0;
+    }
+
+    &:hover:not(:focus) {
+        border-color: #94a3b8;
+    }
+
+    &.is-invalid {
+        border-color: #ef4444;
+        animation: shake 0.4s ease;
+
+        &:focus {
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+        }
+    }
 }
 
 // ---- Alerts ----
@@ -427,8 +520,15 @@
 }
 
 @keyframes floatIdle {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-6px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
 }
 
 // ---- Section heading inside card ----
